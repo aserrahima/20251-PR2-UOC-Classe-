@@ -22,18 +22,11 @@ function loadFromStorage(key, defaultValue) {
   }
 }
 
-function saveToStorage(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error("Error guardant a LocalStorage:", e);
-  }
-}
-
 function getCurrentUser() {
   return loadFromStorage("currentUser", null);
 }
 
+// Assegurem que existeixin les llistes (per tal d'evitar undefined)
 function ensureUserLists(user) {
   if (!user) return null;
   if (!user.lists) user.lists = {};
@@ -43,52 +36,40 @@ function ensureUserLists(user) {
 }
 
 function updateMenu() {
-    //...
   const user = ensureUserLists(getCurrentUser());
 
-  // Aquests IDs han d'existir al teu HTML (si no, simplement no fa res)
-  const userEl = document.getElementById("menuUserName");
-  const teamCountEl = document.getElementById("menuMyTeamCount");
-  const wishesCountEl = document.getElementById("menuWishesCount");
+  // IDs del HTML empleats
+  const userEl = document.getElementById("menuButton");
+  const teamCountEl = document.getElementById("myTeamCount");
+  const wishesCountEl = document.getElementById("wishesCount");
 
+  // Mostrem el nom d'usuari al botó del menú
   if (userEl) {
-    userEl.textContent = user ? (user.name || user.email || "Usuari") : "No logejat";
+    userEl.textContent = user ? (user.username || user.name || "Usuario") : "Usuario";
   }
 
-  if (teamCountEl) {
-    teamCountEl.textContent = user ? user.lists.myTeam.length : "0";
-  }
-
-  if (wishesCountEl) {
-    wishesCountEl.textContent = user ? user.lists.wishes.length : "0";
-  }
-
-  // Nota (CAT): si no hi ha usuari, pots amagar parts del menú (opcional)
-  const logoutBtn = document.getElementById("btnLogout");
-  if (logoutBtn) {
-    logoutBtn.style.display = user ? "inline-block" : "none";
-  }
+  // Comptadors
+  if (teamCountEl) teamCountEl.textContent = user ? user.lists.myTeam.length : "0";
+  if (wishesCountEl) wishesCountEl.textContent = user ? user.lists.wishes.length : "0";
 }
 
-// Función para cerrar sesión
+// Funció per tancar sessió
 function logout() {
-    //...
-  // Nota (CAT): tanquem sessió eliminant el currentUser
+  // Nota (CAT): eliminem l'usuari actual
   localStorage.removeItem("currentUser");
   updateMenu();
-  // Redirigim a login (canvia el nom si cal)
   window.location.href = "index.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   updateMenu();
 
-  const btnLogout = document.getElementById("btnLogout");
-  if (btnLogout) {
-    btnLogout.addEventListener("click", (e) => {
+  // Botó logout (real a partir del html que tenim)
+  const logoutBtn = document.getElementById("logoutButton");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       logout();
     });
   }
 });
-
