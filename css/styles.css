@@ -122,24 +122,80 @@ body {
     opacity: 0.6; /* Añade un efecto de "pantalla tupida" */
 }
 
+//ALTRES DADES que hi havia a l'enunciat:
 /* Estilos para la sección de búsqueda */
-
 /* Estilos para la sección de ordenación */
-
 /* Estilos para el indice de Pokemons */
-
 /*.pokemon-container {
-
 }
 .card {
-
 }
-
 --Los estilos que consideréis necesarios--
 */
-
 /* Estilos para el detalle Pokémon*/
-
 /* Estilos para las listas de Pokemon */
-
 /* Estilos para la login y registro */
+
+
+
+/* CONTINUACIÓ DELS ESTILS QUE FALTAVEN: 
+
+/* Normalització útil sense trepitjar el codi anterior proporcionat per l'assignatura */
+* { box-sizing: border-box; }
+
+/* Maquetació general */
+.container { max-width: 1000px; margin: 0 auto; padding: 16px; }
+
+/* Utilitats */
+.row { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.spacer { flex: 1; }
+.center { display: flex; justify-content: center; padding: 16px 0; }
+.muted { color: #666; }
+.hidden { display:none; }
+
+/* Formularis */
+label { display:block; margin-top: 10px; font-weight: 600; }
+input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-top: 6px; }
+button { padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Menú alternatiu (per si a l’HTML s’usa .menu en lloc de .navbar) */
+.menu { display:flex; gap: 12px; padding: 12px 16px; background: #111; color: #fff; align-items: center; }
+.menu a { color:#fff; text-decoration: none; }
+.menu .userbox { display:flex; gap: 10px; align-items: center; }
+.menu button { background: transparent; color:#fff; border-color: rgba(255,255,255,.25); }
+
+/* Graella de cards */
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+.card .poke-img { width: 100%; height: 170px; object-fit: contain; cursor: pointer; }
+.poke-title { margin: 10px 0 6px; cursor:pointer; text-transform: capitalize; }
+
+/* Filtres */
+.filters { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+
+/* Llistes */
+.list-item { display:flex; align-items:center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+.list-left { display:flex; gap: 10px; align-items:center; cursor:pointer; }
+.thumb { width: 56px; height: 56px; object-fit: contain; }
+
+/* Detall */
+.detail { display:grid; grid-template-columns: 260px 1fr; gap: 16px; align-items: start; }
+.detail-img { width: 100%; object-fit: contain; background:#fff; border-radius: 10px; padding: 8px; }
+@media (max-width: 720px) { .detail { grid-template-columns: 1fr; } }
+
+
+/* Contenidor principal de l’índex de Pokémons */
+.pokemon-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+/* Targetes (cards) de Pokémon */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+    margin: 12px 0;
+}
